@@ -10,5 +10,5 @@ def maxProfit(prices):
             max_profit = price - min_price
     return max_profit
 
-prices = [7,1,6,4,8,6]
+prices = [7,1,6,4,8,7]
 print(maxProfit(prices))
