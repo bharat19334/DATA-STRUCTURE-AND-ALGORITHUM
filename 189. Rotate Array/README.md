@@ -9,73 +9,112 @@ Given an integer array `nums`, rotate the array to the right by `k` steps, where
 ## Example 1
 
 Input:
+
+```python
 nums = [1,2,3,4,5,6,7]
 k = 3
+```
 
 Output:
+
+```python
 [5,6,7,1,2,3,4]
-
-Explanation:
-
-1 step rotation:
-[7,1,2,3,4,5,6]
-
-2 step rotation:
-[6,7,1,2,3,4,5]
-
-3 step rotation:
-[5,6,7,1,2,3,4]
+```
 
 ---
 
-## Intuition
+## Example 2
 
-Instead of shifting elements one by one, we can use the Reverse Technique.
+Input:
 
-For:
+```python
+nums = [-1,-100,3,99]
+k = 2
+```
 
-nums = [1,2,3,4,5,6,7]
-k = 3
+Output:
 
-Step 1: Reverse the entire array
+```python
+[3,99,-1,-100]
+```
 
-[7,6,5,4,3,2,1]
+---
 
-Step 2: Reverse first k elements
+## Brute Force Solution
 
-[5,6,7,4,3,2,1]
+The idea is simple:
 
-Step 3: Reverse remaining elements
+- Remove the last element of the array.
+- Insert it at the beginning.
+- Repeat this process `k` times.
 
+For the array:
+
+```python
+[1,2,3,4,5,6,7]
+```
+
+After 1 rotation:
+
+```python
+[7,1,2,3,4,5,6]
+```
+
+After 2 rotations:
+
+```python
+[6,7,1,2,3,4,5]
+```
+
+After 3 rotations:
+
+```python
 [5,6,7,1,2,3,4]
-
-Final rotated array obtained.
+```
 
 ---
 
 ## Python Solution
 
 ```python
-class Solution(object):
-    def rotate(self, nums, k):
-        n = len(nums)
-        k %= n
+def rotate(nums, k):
+    n = len(nums)
 
-        nums.reverse()
-        nums[:k] = reversed(nums[:k])
-        nums[k:] = reversed(nums[k:])
+    k = k % n
+
+    for i in range(k):
+        last_element = nums.pop()
+        nums.insert(0, last_element)
+
+    return nums
+
+
+nums = [1,2,3,4,5,6,7]
+k = 3
+
+print(rotate(nums, k))
 ```
+
+---
 
 ## Time Complexity
 
-O(n)
+```text
+O(k × n)
+```
+
+---
 
 ## Space Complexity
 
+```text
 O(1)
+```
+
+---
 
 ## Topics
 
 - Array
-- Two Pointers
-- Math
+- Simulation
+- Brute Force
